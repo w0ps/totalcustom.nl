@@ -1,0 +1,3 @@
+{ "javascripts": {"unassigned": "date", "assigned": [
+    "three.min", "detector", "materials", "objects", "geometryGenerators", "environment", "entities", "navigainer", "dat.gui.min", "gui"
+]} }

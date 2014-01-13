@@ -1,0 +1,1 @@
+A jquery plugin that enables easy to use doubleclick and singleclick events

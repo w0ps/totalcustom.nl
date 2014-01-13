@@ -1,0 +1,18 @@
+Examples:
+
+<ul class="items">
+  <li>
+	  <div id="simpleExample" class="example"></div>
+	  <span class="caption">A simple chart, used by the system for debugging purposes</span>
+		<code id="editableRing" contenteditable="true"></code>
+	</li>
+	<li>
+		<div id="sff" class="example"></div>
+		<span class="caption">An ancient algorithm</span>
+	<li>
+		<div id="mayhem" class="example">
+			<button id="initDemo">Start the mayhem!</button>
+			<span class="caption">Full blown visual chaos</span>
+		</div>
+	</li>
+</ul>

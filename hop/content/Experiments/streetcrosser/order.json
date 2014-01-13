@@ -1,0 +1,8 @@
+{"javascripts": {
+  "unassigned": "date",
+  "assigned": [
+    "underscore",
+    "parallel.min",
+    "streetcrosser"
+  ]
+}}

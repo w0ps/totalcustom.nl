@@ -1,0 +1,7 @@
+#wrap > article img.default {
+  display: block;
+  margin: 0 auto;
+}
+#wrap > article figure.default figcaption {
+  text-align: center;
+}

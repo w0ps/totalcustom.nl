@@ -1,0 +1,43 @@
+<style>
+	figure.panel{
+		overflow: hidden;
+		width: 140px;
+		height: 140px;
+	}
+</style>
+<figure name="radiant" style="width: 100px; height: 100px; float: right; margin-right: -60px; margin-top: -110px;"></figure>
+In 2007 gemaakte serie tekeningen, om als spel achtergronden te dienen en een verhaal te vertellen.
+In opdracht van GamePoint. Teksten in samenwerking met <a href="http://www.christiaanstam.com">Christiaan Stam</a>
+<h3>Hoofdstuk 1</h3>
+<figure name="1" class="panel"><figcaption>De natuur in haar vanzelfsprekende perfectie</figcaption></figure>
+<figure name="2" class="panel"><figcaption>De droogte in dit tranendal drijft de boeren tot gekte</figcaption></figure>
+<figure name="3" class="panel"><figcaption>De edele torens van goud en hun meesters zo trots</figcaption></figure>
+<figure name="4" class="panel"><figcaption>Wie had hem verwacht? Hij is dodelijke pracht</figcaption></figure>
+<figure name="5" class="panel"><figcaption>Het vuur aan de schenen en de mensen verdwenen<figcaption></figure>
+<h3>Hoofdstuk 2</h3>
+<figure name="6" class="panel"><figcaption>Niet ver hier vandaan moet een meid op redding gaan</figcaption></figure>
+<figure name="7" class="panel"><figcaption>De maan verlicht haar gezicht en de rovers zijn gezwicht</figcaption></figure>
+<figure name="8" class="panel"><figcaption>De overlevenden om het vuur en de schutters op de muur</figcaption></figure>
+<figure name="9" class="panel"><figcaption>De parel in de as, waar bewaard word wat was</figcaption></figure>
+<figure name="10" class="panel"><figcaption>Bij het eeuwig meer onder de grond was er licht dat zij vond</figcaption></figure>
+<h3>Hoofdstuk 3</h3>
+<figure name="11" class="panel"><figcaption>Door de tekens op de steen komt er nu hulp hierheen</figcaption></figure>
+<figure name="12" class="panel"><figcaption>Snel de brand geblust, zij regent op sawa's als een lust</figcaption></figure>
+<figure name="13" class="panel"><figcaption>Nu zijn de mensen klaar met hun geschrei en vieren ze hun redding blij</figcaption></figure>
+<figure name="14" class="panel"><figcaption>Dat maakt rood furieus en hij jaagt vicieus</figcaption></figure>
+<figure name="15" class="panel"><figcaption>Het gevecht duurde ruim vijf uur, het water verdampt maar dooft het vuur</figcaption></figure>
+<h3>Hoofdstuk 4</h3>
+<figure name="16" class="panel"><figcaption>Om het geleerde te onthouden zijn ze een monument aan het bouwen</figcaption></figure>
+<figure name="17" class="panel"><figcaption>Vele jaren zijn vergaan, nu komt er een bezoeker aan</figcaption></figure>
+<figure name="18" class="panel"><figcaption>Hij komt iets zoeken om voor zijn baas vooruitgang te boeken</figcaption></figure>
+<figure name="19" class="panel"><figcaption>Het artefact dat hij meebracht gaf de corporatie veel macht</figcaption></figure>
+<figure name="20" class="panel"><figcaption>In de ruimte is het kil. Er komt iets aan, nog stil</figcaption></figure>
+<h3>Hoofdstuk 5</h3>
+<figure name="21" class="panel"><figcaption>Door wat ze ziet met haar vermogen is deze vrouw nu sterk bewogen</figcaption></figure>
+<figure name="22" class="panel"><figcaption>Als een storm brengt hij veel schade, hij kent geen end of genade</figcaption></figure>
+<figure name="23" class="panel"><figcaption>In de tempel vindt zij rust, zich van het razende gevaar bewust</figcaption></figure>
+<figure name="24" class="panel"><figcaption>Ze ziet in het zwart menig kleur, met haar liefde opent ze zijn deur</figcaption></figure>
+<figure name="25" class="panel"><figcaption>Samen vliegen ze door de nacht, naar de eeuwigheid die lacht</figcaption></figure>
+<br>
+<h1>Kaart van de verhaallijn</h1>
+<figure name="map" style="width: 500px; height: 500px; display: block; margin: 0 auto;" ><figcaption style="text-align: center;">De route loopt volgens de contour van het sterrenbeeld Draco</figcaption></figure>

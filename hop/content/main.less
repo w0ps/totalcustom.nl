@@ -1,0 +1,164 @@
+@StripeColor: rgb(60,229,255);
+@AlternateColor: rgb(255,60,60);
+
+.simpleBorder(@color: @StripeColor){
+  border: 2px solid @color;
+  border-radius: 15px;
+  padding: 7px;
+}
+
+.doubleBorder{
+  border-style: double;
+}
+
+.outerGlow(@size: 20px, @color: @StripeColor){
+  box-shadow: 0px 0px @size @color;
+}
+
+*{
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body{
+  font-family: sans-serif;
+  background: black;
+}
+
+#wrap{
+  max-width: 1000px;
+  margin: 0 auto;
+  outline: 1px solid black;
+  padding: 20px;
+}
+
+header{
+  text-align: center;
+	position: relative;
+}
+
+a{
+	color: rgb(255,30,0);
+	&.readmore{
+		display: block;
+		text-align: center;
+		color: rgb(255,225,0);
+		text-decoration: none;
+		&:hover{ text-decoration: underline; }
+		&:after{
+			color: rgb(255,225,0);
+			content: 'See more';
+			font-weight: heavy;
+			text-decoration: none;
+		}
+	}
+}
+
+header > nav{
+  display: block;
+  text-align: center;
+  a{
+    margin-right: 10px;
+    text-decoration: none;
+    color: transparent;
+    background-color: black;
+    padding: 2px 5px;
+    font-family: arial;
+    font-weight: bold;
+    .simpleBorder;
+		.outerGlow;
+		text-shadow: 0px 0px 3px @StripeColor;
+    &:hover{
+			color: black;
+      background-color: white;
+    }
+		&.active{
+			border: 2px solid white;
+			box-shadow: 0 0 20px white;
+			color: white;
+		}
+  }
+}
+
+#wrap > section, #wrap > article{
+  clear: both;
+  .simpleBorder;
+  .doubleBorder;
+  box-shadow: 0px 0px 10px @AlternateColor inset, 0px 0px 20px @StripeColor;
+  color: white;
+	box-sizing: content-box;
+	padding: 20px 60px 30px 60px;
+  h1{
+    color: white;
+		text-shadow: 0px 0px 4px @StripeColor;
+    text-align: center;
+		&:before { content: '(( '; }
+		&:after { content: ' ))'; }
+  }
+  h2{
+		margin-top: 0;
+    text-align: center;
+		border-bottom: 1px dashed @StripeColor;
+		& > a{
+			&:before{
+				content: '/// ';
+			}
+			&:after{
+				content: ' \\\\\\';
+			}
+			text-decoration: none;
+			color: transparent;
+			text-shadow: 0px 0px 3px @StripeColor;
+			&:hover{
+				color: white;
+				text-shadow: 0px 0px 10px @StripeColor;
+			}
+		}
+  }
+	h3{
+		margin-left: 30px;
+		margin-right: 300px;
+		padding-left: 30px;
+		border-bottom: 1px dashed grey;
+	}
+	p {
+		margin: 30px 40px 30px 70px;
+	}
+	article{
+		border-radius: 10px;
+		padding: 5px 20px;
+		box-shadow: 0px 0px 10px @StripeColor inset, 0px 0px 20px @AlternateColor;
+		&:not(:last-child){
+			margin-bottom: 30px;
+		}
+		img{
+			display: block;
+			margin: 0 auto;
+			padding-top: 30px;
+			padding-bottom: 30px;
+		}
+}
+}
+
+#FolderCMSForm{
+  border: 1px solid black;
+  width: 300px;
+  margin: 0 auto;
+  padding: 0 10px 10px 10px;
+  box-shadow: 2px 2px 3px #888888 inset;
+  label{
+    text-align: right;
+    display: inline-block;
+    width: 100px;
+  }
+  input, textarea{
+    box-shadow: 2px 2px 3px #888888;
+  }
+}
+
+.button{
+  background-color: #CCC;
+  border: 2px #CCC outset;
+  padding: 0 5px;
+  font-weight: bold;
+  cursor: pointer;
+}

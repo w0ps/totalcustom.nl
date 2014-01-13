@@ -1,0 +1,30 @@
+This script is intended for applying double-click and tap events to html elements.
+It is not extensively tested and probably not working well with coinciding multi-taps.
+
+EXAMPLES
+
+assign custom click/tap event
+<code>
+$('article').on('clickTap', function(e){
+	alert('SINGLECLICK');
+});
+</code>
+<br>
+assign custom double click/tap event
+<code>
+$('article').on('dblClickTap', function(e){
+	alert('DOUBLECLICK');
+});
+</code>
+<br>
+for all selected elements present and future:
+<code>
+$('body').delegate('dblClickTap', 'li.doubleclickable', handler)
+</code>
+<br>
+NOTE: default element click behaviour still executes and needs to be dealt with in an appropriate fashion.
+<br><br>
+Also, this script is loaded in this page so feel free to test it from the console!
+<br>
+Get it <a href="/javascripts/Code/dblClickTap/jquery.dblclick-dbltap-0.1.js">here</a>!
+<br>

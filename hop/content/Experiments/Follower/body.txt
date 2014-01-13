@@ -1,0 +1,2 @@
+<figure name="follower" style="position: absolute; width: 200px; height: 100px; right: 40px; top: 20px;"></figure>
+<div id="followerContainer"><canvas id="canvas1"></canvas><canvas id="canvas2"></div>

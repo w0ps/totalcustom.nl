@@ -1,0 +1,1 @@
+This code can be used to create snakes and trailers in video games, or for a lazy mouse to enable smoother drawing

@@ -1,0 +1,1 @@
+jQuery Double Click/Tap plugin

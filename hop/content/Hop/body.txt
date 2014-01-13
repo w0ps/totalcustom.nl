@@ -1,0 +1,24 @@
+This site is built with my own CMS.<br>
+It's designed to be easily managed by people with little technical knowledge.<br>
+A webmaster can change the contents of his site just by adding folders, text files and images.<br>
+For the more advanced: scripts and stylesheets are included as well.
+
+<h3>Features</h3>
+<ul>
+    <li>Easily put texts and images on your site through a dropbox connection</li>
+    <li>Include stylesheets (css/less) and javascripts just by putting them in the right folder
+    <li>Automatic page refresh when logged on</li>
+</ul>
+
+<h3>Todo's</h3>
+<ul>
+    <li>Webfonts support</li>
+    <li>Lightbox for images</li>
+    <li>Default css scheme</li>
+</ul>
+
+<h3>Showcases</h3>
+<ul>
+    <li>This website</li>
+    <li><a href="http://www.christiaanstam.com">christiaanstam.com</a></li>
+</ul>

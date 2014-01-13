@@ -1,0 +1,6 @@
+Paste an image location in the box below and press load, or take a look around my <a href="/Images">images</a>.
+
+
+<br><br>
+<input id="imageSrc" style="clear:both;" type="text" placeholder="url to image"><input type="button" value="Load" onclick="location.hash = $('#imageSrc').val();"/><br>
+<div id="previousImagesContainer"></div>

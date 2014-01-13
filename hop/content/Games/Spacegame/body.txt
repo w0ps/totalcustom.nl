@@ -1,0 +1,8 @@
+Controls:<br>
+enter: (re)spawn<br>
+ctrl: shoot laser<br>
+spacebar: shoot guided missile<br>
+T: target<br>
+tilde: drop mine<br>
+2: spawn enemy<br>
+<div id="spacearea"></div>

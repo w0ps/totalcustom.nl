@@ -1,0 +1,11 @@
+#Spacegame.overview{
+    #spacearea{
+        height: 600px;
+        width: 800px;
+    }
+}
+
+#Spacegame.exclusive #spacearea{
+    height: 750px;
+    width: 1000px;
+}

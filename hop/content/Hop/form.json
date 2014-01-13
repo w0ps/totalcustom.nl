@@ -1,0 +1,11 @@
+{
+  "name": "FolderCMSForm",
+  "title": "Like to know more?",
+  "submitText": "Send",
+	"completeText": "Your response has been sent.",
+  "fields": {
+    "Name": "text",
+    "Email": "email",
+    "Comment": "textarea"
+  }
+}

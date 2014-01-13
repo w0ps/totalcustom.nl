@@ -1,0 +1,27 @@
+<h2>Neocathedral</h2>
+This cathedral was designed as an experiment with beams and tetra-glasspanels, to try and capture as much colored light as possible.
+<br>
+<figure name="cath14" style="width: 350px; height: 200px;"></figure>
+<figure name="cath11" style="width: 350px; height: 200px;"></figure>
+<figure name="cathfloor1" style="width: 350px; height: 200px;"></figure>
+<figure name="cath12" style="width: 350px; height: 200px;"></figure>
+
+
+<h2>Orbs</h2>
+<figure name="1" style="width: 400px; height: 400px;"></figure>
+<figure name="beyond" style="width: 400px; height: 400px;"></figure>
+<figure name="hangarSphereL" style="width: 840px; height: 466px;"></figure>
+
+
+<h2>Doodle</h2>
+<figure name="doodle0409" style="width: 350px; height: 200px;"></figure>
+<figure name="doodle0381" style="width: 350px; height: 200px;"></figure>
+<figure name="doodle0000" style="width: 350px; height: 200px;"></figure>
+
+
+<h2>Lighthouse</h2>
+<figure name="lighthouse0" style="width: 350px; height: 200px;"></figure>
+<figure name="torentje2" style="width: 350px; height: 200px;"></figure>
+
+
+<h2>Assorted</h2>

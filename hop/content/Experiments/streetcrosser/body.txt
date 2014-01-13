@@ -1,0 +1,34 @@
+Ever since I learnt about neural networks I had an urge to try and see if I can make computers reason with them.<br>
+I tried to think of ways to let them navigate such complex systems as traffic by themselves.<br>
+While most of the calculations involved in traffic can be quite deterministic, it would seem impossible
+to try and write them all down.
+<br><br>Hence: use a neural network.
+This experiment uses <a href="https://github.com/harthur/brain">brain.js</a> by Heather Arthur for a neural network and <a href="https://github.com/adambom/parallel.js">parallel.js</a> by Adam Savitzky to create worker threads, otherwise your browser would hang!
+<br>
+<br>The first thing a neural network needs is training data, and lots of it.
+<br>So I wrote a script to generate street-cross scenarios with varying attributes:
+<ul>
+<li>Car speed</li>
+<li>Car size</li>
+<li>Car distance</li>
+<li>Pedestrian distance to where car drives</li>
+<li>Pedestrian maxspeed</li>
+<li>Pedestrian acceleration</li>
+</ul>
+I could think of more, but these will suffice for this experiment.
+<br>
+<br>So I generate the training data, creating a thousand different scenarios, and each time run it to see if the pedestrian made it to the other side without the car getting there first.
+<br>Because brain.js can only handle input and output data lying between 0 and 1, I needed to convert all factors to be between 0 and 1 and hence, set a range for each of these factors. (Effectively dividing the used carspeed with the maximum carspeed)
+<br>
+<br><div id="showScenarios">
+<div id="oneSimulation" class="button" style="cursor: pointer; float: left; margin-right: 30px;">single simulation</div>
+<div id="kSimulations" class="button" style="cursor: pointer; float: left;">1000 simulations</div><br>
+<br><div id="showResults" style="color: red"></div>
+</div><br>
+So, we have our training data. Not only can we generate it with visuals, we can also do it without, which is a lot faster. Then we feed it into a brain to train it! Because this is rather cpu-intense, we do it in a worker thread (thanks parallel.js!). Now we can test our trained network against the original set or newly generated scenarios!
+<br><br>
+<div id="trainAndTest">
+<div id="trainButton" class="button" style="cursor: pointer; float: left; margin-right: 30px;">Train brain</div>
+<div id="showResults2" style="color: red"></div>
+</div>
+<br><br>Conclusion: It works, somewhat. I figure it's still easier to just use deterministic reasoning, and probably faster too. This might not be the best problem to use a neural network for. Also, it uses default settings for the brain and maybe accuracy and speed can be improved by using an evolutionairy algorithm to come up with the best settings. But that's for another day!

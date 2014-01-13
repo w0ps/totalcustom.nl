@@ -1,0 +1,1 @@
+How well does a neural network predict the safety of a particular street cross?
