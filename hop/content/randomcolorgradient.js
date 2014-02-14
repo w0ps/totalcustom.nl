@@ -103,6 +103,14 @@ function colorBufferToString(buffer){
 
 var gradientColors = [[0,0,0],[1,0,0],[0,1,0],[0,0,1],[1,1,0],[1,0,1],[0,1,1]];
 
+function getNiceColorRGB(colors){
+	var colorRYB = combineColorsRandomly(colors || gradientColors);
+	colorRYB[0] = Math.floor(colorRYB[0] * 256);
+	colorRYB[1] = Math.floor(colorRYB[1] * 256);
+	colorRYB[2] = Math.floor(colorRYB[2] * 256);
+	return ryb2rgb(colorRYB);
+}
+
 function slowlyChangingBackgroundGradient(options){
 	var n = options.n || 50,
 		workBuffer = [],
@@ -136,6 +144,6 @@ function slowlyChangingBackgroundGradient(options){
 }
 
 $(document).ready(function(){
-	slowlyChangingBackgroundGradient({n: 50});
+	//slowlyChangingBackgroundGradient({n: 50});
 });
 

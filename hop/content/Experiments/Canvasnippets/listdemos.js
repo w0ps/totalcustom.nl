@@ -5,7 +5,7 @@ function initMiniCircular(){
 }
 
 function initMiniSeed(){
-	var miniSeedCanvas = new SmartCanvas({ backgroundColor: 'black' }, $('#miniSeed')),
+	var miniSeedCanvas = new SmartCanvas({}, $('#miniSeed')),
 			seed = new SFF({n:7, radii: 50, color: {r: 1, g: 1, b:1 } });
 	miniSeedCanvas.add(seed);
 }

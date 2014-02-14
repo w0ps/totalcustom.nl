@@ -20,21 +20,24 @@ function initDemo() {
   var loop = setInterval(function(){
     
     var newTime =  new Date().getTime(),
-        dt = newTime - lastTime;
+        dt = newTime - lastTime,
+        colorRYB = [
+          Math.round(fit(Math.sin(t / 3), -1, 1, 0, 255)),
+          Math.round(fit(Math.sin(t / 5), -1, 1, 0, 255)),
+          Math.round(fit(Math.sin(t / 8), -1, 1, 0, 255)),
+        ],
+        colorRGB = ryb2rgb(colorRYB);
+
     lastTime = newTime;
     
     t += .001;
-    var dist = fit(Math.sin(t / 21), -1, 1, 0, 1000);
+    var dist = fit(Math.sin(t / 13), -1, 1, 0, 1000);
     myCam.position.x = Math.sin(t * (233/144)) * dist;
     myCam.position.y = Math.cos(t * (144/233)) * dist;
     
     myCam.scale = fit(Math.sin(t / .35), -1, 1, 1/3, 1.2);
     
-    mySmartCanvas.backgroundColor = 'rgba(' +
-      Math.round(fit(Math.sin(t / 5), -1, 1, 0, 255)) + ',' +
-      Math.round(fit(Math.sin(t / 8), -1, 1, 0, 255)) + ',' +
-      Math.round(fit(Math.sin(t / 13), -1, 1, 0, 255)) + ',' +
-      (.004) + ')'
+    mySmartCanvas.backgroundColor = 'rgba(' + [ colorRGB[0], colorRGB[1], colorRGB[2], .004 ].join(',') + ')';
     
     mySmartCanvas.step();
   });
@@ -134,7 +137,7 @@ function createRandomCircle1(coordinates, rotSpd) {
   //myCam.scale = Math.random();
   
   //newDataCircle.scale = .5 + (Math.random() * 5) / 3;
-  newDataCircle.rotationSpd = Math.random() * .05 + .005;
+  newDataCircle.rotationSpd = Math.random() * .1 + .008;
   newDataCircle.rotationSpdFloor = newDataCircle.rotationSpd;
   newDataCircle.rotationSpd = rotSpd || newDataCircle.rotationSpd;
   
@@ -149,14 +152,16 @@ function createRandomCircle1(coordinates, rotSpd) {
 
 window.randomCircleData1 = function randomCircleData1(amount, maxRadius, maxWidth) {
   var data = [],
-      start, end, width, radius, color;
+      start, end, width, radius, colorRGB, color;
   
   while (data.length < amount) {
     start = Math.random();
     radius = (maxRadius || 300) - (Math.random() * Math.random() * (maxRadius || 300));
     end = start + Math.random() * Math.random() * ((25) / radius);
     width = Math.min(Math.random() * (maxWidth || 20), radius);
-    color = {r: Math.round(Math.random() * 255), g: Math.round(Math.random() * 255), b: Math.round(Math.random() * 255) };
+    colorRGB = getNiceColorRGB();
+    console.log(colorRGB);
+    color = {r: colorRGB[0], g: colorRGB[1], b: colorRGB[2] };
     
     data.push({
       start: start,
