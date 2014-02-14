@@ -45,10 +45,10 @@ function combineColorsRandomly(passedColors){
 	return newColor;
 }
 
-function combineBuffers(buffer1, buffer2, ratio){
+function combineBuffers(buffer1, buffer2, ratio, bufferNew){
 	if(buffer1.length !== buffer2.length) return 'buffer mismatch';
 	ratio = ratio !== undefined ? ratio : .5;
-	var newBuffer = [],
+	var newBuffer = bufferNew || [],
 		invRatio = 1 - ratio,
 		item1, item2;
 	
@@ -56,52 +56,68 @@ function combineBuffers(buffer1, buffer2, ratio){
 		item1 = buffer1[i];
 		item2 = buffer2[i];
 
-		newBuffer.push({
+		newBuffer[i] = {
 			t: item1.t * invRatio + item2.t * ratio,
 			color: [
 				item1.color[0] * invRatio + item2.color[0] * ratio,
 				item1.color[1] * invRatio + item2.color[1] * ratio,
 				item1.color[2] * invRatio + item2.color[2] * ratio
 			]
-		});
+		};
+	}
+	
+	return newBuffer;
+}
+
+function bufferToRGB(buffer){
+	var newBuffer = [],
+		item, color, colorScaled;
+
+	for(var i in buffer){
+		item = buffer[i];
+		color = item.color;
+		colorScaled = [
+			Math.floor(color[0] * 256),
+			Math.floor(color[1] * 256),
+			Math.floor(color[2] * 256)
+		];
+		newBuffer.push({t: item.t, color: ryb2rgb(colorScaled)});
 	}
 
 	return newBuffer;
 }
 
 function colorBufferToString(buffer){
-	var string = '',
+	var parts = [],
 		workBuffer = buffer.slice(),
-		item, color, colorRybbed;
+		item, color;
 	while(workBuffer.length){
 		item = workBuffer.shift();
-		color = [
-			Math.floor(item.color[0] * 256),
-			Math.floor(item.color[1] * 256),
-			Math.floor(item.color[2] * 256)
-		];
-		colorRybbed = ryb2rgb(color);
-		string += 'rgb(' + colorRybbed[0] + ',' + colorRybbed[1] + ',' + colorRybbed[2] + ') ' + (item.t * 100) + '%';
-		if(workBuffer.length) string += ', ';
+		color = item.color;
+		
+		parts.push('rgb(' + Math.floor(color[0]) + ',' + Math.floor(color[1]) + ',' + Math.floor(color[2]) + ') ' + (item.t * 100) + '%');
 	}
 
-	return string;
+	return parts.join(', ');
 }
 
 function slowlyChangingBackgroundGradient(options){
-	var buffers = [],
+	var workBuffer = [],
+		buffers = [],
 		colors = [[0,0,0],[1,0,0],[0,1,0],[0,0,1]],
 		t = 0;
 
 	buffers.push(
-		randomColorBufferA({n: 50, colors: colors}),
-		randomColorBufferA({n: 50, colors: colors})
+		bufferToRGB(randomColorBufferA({n: 50, colors: colors})),
+		bufferToRGB(randomColorBufferA({n: 50, colors: colors}))
 	);
-	setInterval(function(){
-		if(window['noGradientAnimation']) return;
+
+	function step(){
+		console.log('step');
+		//if(window['noGradientAnimation']) return;
 		$(document.body).css({
 			background: 'linear-gradient(to right, ' + colorBufferToString(
-				combineBuffers(buffers[0], buffers[1], (Math.cos(t) / -2 + .5))
+				combineBuffers(buffers[0], buffers[1], (Math.cos(t) / -2 + .5), workBuffer)
 			) + ')'
 		});
 		
@@ -109,9 +125,12 @@ function slowlyChangingBackgroundGradient(options){
 		if(t >= Math.PI){
 			t -= Math.PI;
 			buffers.shift();
-			buffers.push(randomColorBufferA({n: 50, colors: colors}));
+			buffers.push(bufferToRGB(randomColorBufferA({n: 50, colors: colors})));
 		}
-	}, 50);
+		setTimeout(step, 50);
+	}
+
+	setTimeout(step, 50);
 }
 
 slowlyChangingBackgroundGradient();
