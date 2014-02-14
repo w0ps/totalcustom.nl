@@ -101,15 +101,18 @@ function colorBufferToString(buffer){
 	return parts.join(', ');
 }
 
+var gradientColors = [[0,0,0],[1,0,0],[0,1,0],[0,0,1],[1,1,0],[1,0,1],[0,1,1]];
+
 function slowlyChangingBackgroundGradient(options){
-	var workBuffer = [],
+	var n = options.n || 50,
+		workBuffer = [],
 		buffers = [],
-		colors = [[0,0,0],[1,0,0],[0,1,0],[0,0,1]],
+		colors = window.gradientColors,
 		t = 0;
 
 	buffers.push(
-		bufferToRGB(randomColorBufferA({n: 50, colors: colors})),
-		bufferToRGB(randomColorBufferA({n: 50, colors: colors}))
+		bufferToRGB(randomColorBufferA({n: n, colors: colors})),
+		bufferToRGB(randomColorBufferA({n: n, colors: colors}))
 	);
 
 	function step(){
@@ -125,7 +128,7 @@ function slowlyChangingBackgroundGradient(options){
 		if(t >= Math.PI){
 			t -= Math.PI;
 			buffers.shift();
-			buffers.push(bufferToRGB(randomColorBufferA({n: 50, colors: colors})));
+			buffers.push(bufferToRGB(randomColorBufferA({n: n, colors: colors})));
 		}
 		setTimeout(step, 50);
 	}
@@ -133,5 +136,7 @@ function slowlyChangingBackgroundGradient(options){
 	setTimeout(step, 50);
 }
 
-slowlyChangingBackgroundGradient();
+$(document).ready(function(){
+	slowlyChangingBackgroundGradient({n: 50});
+});
 
