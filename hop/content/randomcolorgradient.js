@@ -116,8 +116,7 @@ function slowlyChangingBackgroundGradient(options){
 	);
 
 	function step(){
-		console.log('step');
-		//if(window['noGradientAnimation']) return;
+		if(window['noGradientAnimation']) return;
 		$(document.body).css({
 			background: 'linear-gradient(to right, ' + colorBufferToString(
 				combineBuffers(buffers[0], buffers[1], (Math.cos(t) / -2 + .5), workBuffer)
