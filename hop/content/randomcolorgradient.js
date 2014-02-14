@@ -64,4 +64,4 @@ function colorBufferToString(buffer){
 	return string;
 }
 
-$(document.body).css({background: 'linear-gradient(to right, ' + colorBufferToString(randomColorBufferA({colors: [[0,0,0],[1,0,0],[0,1,0],[0,0,1],[1,1,1]]})) + ')'});
+$(document.body).css({background: 'linear-gradient(to right, ' + colorBufferToString(randomColorBufferA({n: 50, colors: [[0,0,0],[1,0,0],[0,1,0],[0,0,1]]})) + ')'});
