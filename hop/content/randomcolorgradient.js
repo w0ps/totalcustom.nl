@@ -144,6 +144,6 @@ function slowlyChangingBackgroundGradient(options){
 }
 
 $(document).ready(function(){
-	//slowlyChangingBackgroundGradient({n: 50});
+	slowlyChangingBackgroundGradient({n: 50});
 });
 
