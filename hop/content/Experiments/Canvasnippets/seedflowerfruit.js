@@ -19,12 +19,11 @@
 	(function(){
 		this.draw = function drawDataCircle(context){
 			var position = this.position,
-					color = this.color,
 					tau = 2 * Math.PI;
 
 			context.beginPath();
 			context.arc(position.x, position.y, this.radius, 0, tau);
-			if(color) context.strokeStyle = color.setRGB(color.r / 255, color.g / 255, color.b / 255).getStyle();
+			if(this.color) context.strokeStyle = this.color.getStyle();
 			if(this.width) context.lineWidth = seg.width;
 			if(this.fill){
 				context.fillStyle = this.fill;
@@ -111,7 +110,7 @@
 			}
 			else cursor = this.position.clone();
 
-			newCircle = new Circle({ position: cursor.clone() });
+			newCircle = new Circle({ position: cursor.clone(), color: this.getColor(), radius: this.radii });
 			//newCircle.draw(sffCanvas.context);
 			
 			if(circles.length){
@@ -153,6 +152,9 @@
 
 			circles.push(newCircle);
 		};
+		this.getColor = function(){
+			return this.color;
+		};
 		this.draw = function(context){
 			var circles = this.circles,
 					tau = 2 * Math.PI,
@@ -182,13 +184,12 @@
 		}
 	}).call(SFF.prototype);
 
-	window.sff = SFF;
+	window.SFF = SFF;
 	function createSFFExample(){
-		var sffCanvas = new SmartCanvas({backgroundColor: 'white'}, $('#sff'));
+		var sffCanvas = new SmartCanvas({}, $('#sff'));
 		$('#sff').parent().css('height', '300px');		
 		//sffCanvas.camera.rotation = -Math.PI / 2;
 		sffCanvas.camera.scale = .6;
-		delete sffCanvas.backgroundColor;
 		sffCanvas.context.strokeStyle = 'red';
 		window.sffCanvas = sffCanvas;
 

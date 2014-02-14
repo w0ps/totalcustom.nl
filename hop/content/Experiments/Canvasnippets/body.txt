@@ -1,0 +1,58 @@
+<section>
+	<h3>SmartCanvas</h3>
+
+	The scripts shown on this page all make use of the same parent framework, that is,
+	they use an enhanced canvas element, I call it SmartCanvas.
+	It has easy methods for drawing functions such as clearing,
+	having background colors and trails. It draws objects in relative space
+	and has a camera that can move around and zoom in and out,
+	and sub-objects can have draw, step, click and hover functions applied to them.
+</section>
+<section>
+	<h3>Subobjects</h3>
+
+	While these snippets can be used in this smart canvas, they probably work in other contexts too.
+	With no more adue, here's the current collection:
+	<ul>
+		<li>
+			<div id="miniCircular"></div>
+			<div class="synopsis">
+				<strong>Circular Diagram</strong>
+				<p>The circular diagram is meant to display data such as percentages, record position and pie charts.</p>
+			</div>
+		</li>
+		<li>
+			<div id="miniSeed"></div>
+			<h6>Seed, flower & fruit of life</h6>
+			<span>One of the oldest algorithms known to man</span>
+		</li>
+	</ul>
+</section>
+<section>
+	<h4>Circular Diagrams</h4>
+
+	These circular diagrams consist of an array of segments,
+	each of them having their own start and end points,
+	as well as a radius and thickness. Thickness counts to both sides of the radius,
+	so to have a segment reach the center without exceeding it, give it a width equal to its radius.
+	Start and end values are given in full circle units, so 1 is a whole circle.
+
+	<div class="contain">
+		<span class="caption">An editable colorcircle</span>
+		<div id="colorCircle" class="example"></div>
+		<code id="editableRing" contenteditable="true" class="beside"></code>
+	</div>
+
+	<span class="caption">Full blown visual chaos</span>
+	<figure name="circlemayhem" class="example">
+	<button id="initDemo">Start the mayhem!</button>
+
+</section>
+<section id="SFF">
+	<ul class="items">
+		<li>
+			<div id="sff" class="example"></div>
+			<span class="caption">An ancient algorithm</span>
+		</li>
+	</ul>
+</section>

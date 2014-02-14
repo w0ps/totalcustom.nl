@@ -1,42 +1,12 @@
 //Author Ivo de Kler - totalcustom.nl
 
-function initExample(){
-	var $exampleDiv = $('#simpleExample');
 
-	window.simpleSmartCanvas = new SmartCanvas({}, $exampleDiv);
-	simpleSmartCanvas.camera.rotation = -Math.PI / 2;
-
-	var dataCircle = new DataCircle();
-	simpleSmartCanvas.add(dataCircle);
-
-	$('code#editableRing').html(JSON.stringify(DataCircle.prototype.defaultData)).on('change', function(e){
-		var object = getObjectFromString($(this).html()),
-				index = simpleSmartCanvas.contents.indexOf(dataCircle);
-		if(object){
-			$(this).css({color: 'white'});
-			simpleSmartCanvas.contents.splice(index, 1);
-			dataCircle = new DataCircle(object);
-			simpleSmartCanvas.add(dataCircle);
-		}
-		else{
-			$(this).css({color: 'red'});
-		}
-	});
-}
 
 function initDemo() {
-  var $article = $('#circulardata');
-  var $container = $('<div class="experiment">').appendTo($article);
-  
-  if ($('#circulardata.exclusive').length) {
-		var width = $article.innerWidth();
-		width -= parseInt($article.css('padding-left'), 10);
-		width -= parseInt($article.css('padding-right'), 10);
 
-    $container.css({width: width + 'px', height: '600px'});
-  }
+  var $overlay = $('body').overlay();
   
-  window.mySmartCanvas = new SmartCanvas({backgroundColor: 'rgba(0,0,0,1)'}, $container);
+  window.mySmartCanvas = new SmartCanvas({backgroundColor: 'rgba(0,0,0,1)'}, $overlay);
   window.myCam = mySmartCanvas.camera;
   window.myCircle = new DataCircle(randomCircleData1(100, 500), {
     defaultHover: function(seg){
@@ -44,14 +14,6 @@ function initDemo() {
       seg.width = Math.min(seg.radius, seg.width * 1.1);
     }
   });
-  //myCircle.position.x += 100;
-  //myCircle.position.y += 100;
-  myCam.rotationSpd = -.001;
-  
-  myCircle.scale = 1;
-  myCircle.rotationSpd = .002;
-  
-  //mySmartCanvas.add(myCircle);
   
   var t = Math.random() * 1000000,
       lastTime = new Date().getTime();
@@ -103,10 +65,6 @@ function initDemo() {
   });
   
   autoAddRestart = setInterval(autoCreateCircle, autoAddTime);
-  
-  $(window).on('keyup', function(e){
-    console.log(e.keyCode);
-  });
 }
 var stopAutoCreate = false;
 
@@ -213,5 +171,4 @@ window.randomCircleData1 = function randomCircleData1(amount, maxRadius, maxWidt
   return data;
 }
 
-initExample();
 $('#initDemo').on('click', initDemo);

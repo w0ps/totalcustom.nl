@@ -1,0 +1,51 @@
+article section {
+  clear: both;
+}
+.example {
+  width: 300px;
+  height: 300px;
+  display: inline-block;
+  border: 1px solid grey;
+}
+code {
+  width: 370px;
+  display: inline-block;
+  white-space: pre;
+  tab-size: 2;
+}
+code.beside {
+  height: 300px;
+  overflow-y: scroll;
+}
+ul {
+  list-style: none;
+}
+ul li {
+  clear: both;
+}
+ul #miniCircular,
+ul #miniSeed {
+  width: 150px;
+  height: 150px;
+}
+ul div {
+  display: inline-block;
+  float: left;
+}
+ul div.synopsis {
+  width: 400px;
+  min-height: 150px;
+}
+.contain {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid white;
+}
+.contain span {
+  display: block;
+  text-align: center;
+  padding-bottom: 15px;
+}
+article > div {
+  clear: both;
+}
