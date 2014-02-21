@@ -1,0 +1,17 @@
+.DS_Store
+hop/.gitignore
+hop/README.md
+hop/app.js
+hop/config.json.example
+hop/content/authentication.json.example
+hop/enrich.js
+hop/fileUtils.js
+hop/imageCacher.js
+hop/indexer.js
+hop/mailgunner.js
+hop/memoryStore.js
+hop/package.json
+hop/routes/
+hop/socketeer.js
+hop/socketscripts/aSocketScript.js.example
+hop/views/
