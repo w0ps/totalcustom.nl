@@ -116,7 +116,10 @@ function slowlyChangingBackgroundGradient(options){
 		workBuffer = [],
 		buffers = [],
 		colors = window.gradientColors,
-		t = 0;
+		t = 0,
+		timeTreshold = 1;
+
+
 
 	buffers.push(
 		bufferToRGB(randomColorBufferA({n: n, colors: colors})),
@@ -125,6 +128,7 @@ function slowlyChangingBackgroundGradient(options){
 
 	function step(){
 		if(window['noGradientAnimation']) return;
+		var time = new Date().getTime();
 		$(document.body).css({
 			background: 'linear-gradient(to right, ' + colorBufferToString(
 				combineBuffers(buffers[0], buffers[1], (Math.cos(t) / -2 + .5), workBuffer)
@@ -137,7 +141,9 @@ function slowlyChangingBackgroundGradient(options){
 			buffers.shift();
 			buffers.push(bufferToRGB(randomColorBufferA({n: n, colors: colors})));
 		}
-		setTimeout(step, 50);
+		//if(new Date().getTime() - time < timeTreshold){
+			setTimeout(step, 50);
+		//}
 	}
 
 	setTimeout(step, 50);

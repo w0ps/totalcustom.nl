@@ -47,11 +47,16 @@ header > nav{
     font-size: 20px;
     font-weight: bold;
     text-shadow: 0 0 3px black;
+    transition: font-size .5s;
+    -webkit-transition: font-size .5s;
     &:hover{
 			color: yellow;
+			font-size: 25px;
     }
 		&.active{
-			color: orange;
+			font-size: 30px;
+			padding-top: 0px;
+			padding-bottom: 10px;
 			&:hover{
 				color: yellow;
 			}
@@ -59,7 +64,7 @@ header > nav{
   }
 }
 
-#wrap > section, #wrap > article{
+#content > section, #content > article{
   clear: both;
   color: white;
   background: rgba(0,0,0,0.6);
@@ -67,6 +72,7 @@ header > nav{
 	border-radius: 50px;
 	border: 10px solid white;
 	padding: 20px 60px 30px 60px;
+	box-shadow: 0 0 30px black inset, 0 0 15px black inset, 0 0 25px white, 0 0 12px white;
   h1{
     color: white;
     text-align: center;
@@ -105,6 +111,7 @@ header > nav{
 		border: 5px solid white;
 		padding: 5px 20px;
 		background: rgba(0,0,0,0.5);
+		box-shadow: 0 0 15px black inset, 0 0 7px black inset, 0 0 12px white, 0 0 6px white;
 		&:not(:last-child){
 			margin-bottom: 30px;
 		}
