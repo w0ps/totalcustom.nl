@@ -142,7 +142,7 @@ function slowlyChangingBackgroundGradient(options){
 			buffers.push(bufferToRGB(randomColorBufferA({n: n, colors: colors})));
 		}
 		//if(new Date().getTime() - time < timeTreshold){
-			setTimeout(step, 50);
+			//setTimeout(step, 50);
 		//}
 	}
 
