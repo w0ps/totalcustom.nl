@@ -119,34 +119,36 @@ function slowlyChangingBackgroundGradient(options){
 		t = 0,
 		timeTreshold = 1;
 
-
-
 	buffers.push(
-		bufferToRGB(randomColorBufferA({n: n, colors: colors})),
 		bufferToRGB(randomColorBufferA({n: n, colors: colors}))
 	);
 
-	function step(){
-		if(window['noGradientAnimation']) return;
-		var time = new Date().getTime();
-		$(document.body).css({
-			background: 'linear-gradient(to right, ' + colorBufferToString(
-				combineBuffers(buffers[0], buffers[1], (Math.cos(t) / -2 + .5), workBuffer)
-			) + ')'
-		});
-		
-		t += .02;
-		if(t >= Math.PI){
-			t -= Math.PI;
-			buffers.shift();
-			buffers.push(bufferToRGB(randomColorBufferA({n: n, colors: colors})));
-		}
-		//if(new Date().getTime() - time < timeTreshold){
-			//setTimeout(step, 50);
-		//}
-	}
+	$(document.body).css({
+		background: 'linear-gradient(to right, ' + colorBufferToString( buffers[0]) + ')'
+	});
 
-	setTimeout(step, 50);
+	$(document).on('pageTransitionBegin', function transitionGradient(){
+		buffers.push(bufferToRGB(randomColorBufferA({n: n, colors: colors})));
+		(function step(){
+			$(document.body).css({
+				background: 'linear-gradient(to right, ' + colorBufferToString(
+					combineBuffers(buffers[0], buffers[1], (Math.cos(t) / -2 + 0.5), workBuffer)
+				) + ')'
+			});
+			
+			t += 0.2;
+			if(t >= Math.PI){
+				t = 0;
+				//t -= Math.PI;
+				buffers.shift();
+				return;
+			}
+			
+			if(window.requestAnimationFrame) window.requestAnimationFrame(step);
+			else setTimeout(step, 50);
+		})();
+
+	});
 }
 
 $(document).ready(function(){
