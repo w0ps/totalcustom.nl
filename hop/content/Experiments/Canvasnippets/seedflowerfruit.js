@@ -193,7 +193,7 @@
 		sffCanvas.context.strokeStyle = 'red';
 		window.sffCanvas = sffCanvas;
 
-		var mySFF = new SFF({startAngle: Math.random() * Math.PI, n: 37});
+		var mySFF = new SFF({startAngle: Math.random() * Math.PI, n: 37, radii: 55, color: 'white' });
 		sffCanvas.add(mySFF);
 		window.mySFF = mySFF;
 		
