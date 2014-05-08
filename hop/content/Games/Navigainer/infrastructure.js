@@ -2,17 +2,18 @@
 //var CC = {};
 
 (function defineInfrastructure(){
+  var CC = this;
+
   this.Handle = Class.extend({
+    
     init: function(owner){
       this.owner = owner;
-      
-      console.log(this.type);
-      
       this.model = CC.handleModels[this.type].clone();
       if(this.offset) this.model.position = this.offset.clone();
       if(this.rotation) this.model.rotation = this.rotation.clone();
       this.model.handle = this;
     },
+
     type: 'abstract',
     pickable: true,
     material: defMaterial,
@@ -107,68 +108,7 @@
       this.model.handle = this;
       
       this.model.drag = function(point){
-        var handle = this.handle,
-            owner = handle.owner,
-            newSplitter = new CC.Crossroad(),
-            otherSplitter,
-            map = owner.map,
-            refPlane = new RefPlane({position: owner.position.clone()}),
-            hitList = [refPlane],
-            pickables = owner.map.pickables;
-        
-        for (var i in owner.map.pickables) {
-          if (pickables[i].handle.type == 'SplitterConnectHandle') {
-            hitList.push(pickables[i]);
-          }
-        }
-        
-        map.scene.add(refPlane);
-        
-        point.y = owner.position.y;
-        
-				newSplitter.position.copy(point);
-				map.add(newSplitter);
-				handle.highlightOff();
-        
-				newSplitter.showHandles();
-        newSplitter.handles.xzDragHandle.highlightOn();
-        
-        return {
-          pointerMove: function(e){
-            var intersects = map.scene.parent.game.pickPoint(e, hitList);
-            if (intersects[0]) {
-              var firstIntersect = intersects[0].object,
-                  point = intersects[0].point;
-              
-              point.y = newSplitter.position.y;
-              window.insect = intersects[0];
-              
-              if (firstIntersect.isRefPlane) {
-                if (otherSplitter) {
-                  otherSplitter.handles.splitterConnectHandle.highlightOff();
-                  newSplitter = newSplitter = new CC.Crossroad();
-                  map.add(newSplitter);
-                  newSplitter.showHandles();
-                  newSplitter.handles.xzDragHandle.highlightOn();
-                  
-                  otherSplitter = null;
-                }
-                newSplitter.updatePosition(point);
-              }
-              else if (firstIntersect.handle && firstIntersect.handle.type == 'SplitterConnectHandle') {
-                if (!otherSplitter) {
-                  otherSplitter = firstIntersect.handle.owner;
-                  newSplitter.map.remove(newSplitter);
-                }
-                firstIntersect.handle.highlightOn({point: point});
-              }
-              
-            }
-          },
-          pointerUp: function(e){
-            newSplitter.map.scene.remove(refPlane);
-          }
-        }
+        return CC.dragConduitFromSplitter(this.handle, point);
       };
     },
     highlightOn: function(info){
@@ -202,13 +142,33 @@
   
   /* road superclass */
   this.Conduit = this.driveableInfrastructure.extend({
-    init: function(a,b){
-      console.log('hi');
+    init: function initConduit(a,b){
       this.sides = {left: [{lanes: [], borders: []}], right: [{lanes: [], borders: []}] };
-      this.a = a,
-      this.b = b
-    }
+      this.a = a;
+      this.b = b;
+
+      var vertexes = [a.position, a.tangent, b.tangent, b.position];
+    },
+    construct: function constructConduit(){
+      this.path = new THREE.CubicBezierCurve3(this.a.position, this.a.tangent.clone().add(this.a.position), this.b.tangent.clone().add(this.b.position), this.b.position);
+      this.length = this.path.getLength();
+      
+      this.segments = Math.round(this.length / 10);
+      this.radius = 5;
+      //todo generate rest of conduit model in own construct functions
+      
+      this.model = new THREE.Mesh(new RoadGeometry(this.radius, Street.prototype.getSpacedOrientedData.call(this, this.segments), /* debug: */ false), roadMaterial);
+    },
+    type: 'Conduit'
   });
+
+  this.Road = this.Conduit.extend({
+    init: function(a,b){
+      CC.Conduit.prototype.init.call(this, a, b);
+    },
+    type: 'Road'
+  });
+  this.Road.prototype = _.extend(_.extend({}, this.Conduit.prototype), this.Road.prototype);
   
   /* intersection superclass */
   this.Splitter = this.driveableInfrastructure.extend({
@@ -221,6 +181,7 @@
       this.handles = {};
     },
     radius: 10,
+    defaultConduitType: 'Road',
     sortConnections: function(){
       this.connections.sort(function(a, b){
         return a.angle - b.angle
@@ -281,13 +242,18 @@
     }
   });
   
-  this.Connection = this.driveableInfrastructure.extend({
+  this.Connector = this.driveableInfrastructure.extend({
     init: function(splitter, conduit, angle, tangent){
       this.splitter = splitter;
       this.conduit = conduit;
       this.angle = angle;
-      this.tangent = tangent || getVectorFromAngle(angle, this.splitter.tangentSize);
-    }
+      this.tangent = tangent || new THREE.Vector3(0, 0, this.splitter.tangentSize || this.splitter.radius) || getVectorFromAngle(0, this.splitter.tangentSize);
+      this.updatePosition();
+    },
+    updatePosition: function updateConnectorPosition(){
+      this.position = this.splitter.position.clone(); //todo should be splitter.radius * angle + splitter.position
+    },
+    type: 'Connector'
   });
   
   this.Lane = this.driveableInfrastructure.extend({
@@ -321,10 +287,98 @@
   this.Crossroad = this.Splitter.extend({
     init: function(options){
       CC.Splitter.prototype.init.call(this, options || {});
-      console.log(this);
     },
     type: 'Crossroad'
   });
+
+  this.dragConduitFromSplitter = function(handle, point){
+    var owner = handle.owner,
+        relativeVector = point.clone().sub(owner.position),
+        clickAngle = Math.atan2(relativeVector.z, relativeVector.x),
+        newSplitter = new CC.Crossroad(),
+        newConnectorA = new CC.Connector(handle.owner, undefined, clickAngle),
+        newConnectorB = new CC.Connector(newSplitter, undefined, clickAngle + Math.PI),
+        tangentA = newConnectorA.tangent,
+        tangentB = newConnectorB.tangent,
+        newConduit = new CC[owner.defaultConduitType](newConnectorA, newConnectorB),
+        otherSplitter,
+        map = owner.map,
+        refPlane = new RefPlane({position: owner.position.clone()}),
+        hitList = [refPlane],
+        pickables = map.pickables;
+        //_street = new Street();
+
+    newConnectorA.conduit = newConnectorB.conduit = newConduit;
+
+    owner.connections.push(newConnectorA);
+    newSplitter.connections.push(newConnectorB);
+    
+    for (var i in map.pickables) {
+      if (pickables[i].handle.type == 'SplitterConnectHandle') {
+        hitList.push(pickables[i]);
+      }
+    }
+    
+    map.scene.add(refPlane);
+    
+    point.y = owner.position.y;
+    
+    newSplitter.position.copy(point);
+    map.add(newSplitter);
+    handle.highlightOff();
+    
+    newSplitter.showHandles();
+    newSplitter.handles.xzDragHandle.highlightOn();
+    
+    return {
+      pointerMove: function(e){
+        var intersects = map.scene.parent.game.pickPoint(e, hitList);
+        if (intersects[0]) {
+          var firstIntersect = intersects[0].object,
+              point = intersects[0].point;
+          
+          point.y = owner.position.y;
+          
+          if (firstIntersect.isRefPlane) {
+            if (otherSplitter) {
+              otherSplitter.handles.splitterConnectHandle.highlightOff();
+              newSplitter = new CC.Crossroad();
+              newConnectorB.splitter = newSplitter;
+              newSplitter.connections.push(newConnectorB);
+              map.add(newSplitter);
+              newSplitter.showHandles();
+              newSplitter.handles.xzDragHandle.highlightOn();
+              
+              otherSplitter = null;
+            }
+            newSplitter.updatePosition(point);
+          }
+          else if (firstIntersect.handle && firstIntersect.handle.type == 'SplitterConnectHandle') {
+            if (!otherSplitter) {
+              otherSplitter = firstIntersect.handle.owner;
+              newSplitter.map.remove(newSplitter);
+              newSplitter = null;
+
+              newConnectorB.splitter = otherSplitter;
+              otherSplitter.connections.push(newConnectorB);
+            }
+            firstIntersect.handle.highlightOn({point: point});
+          }
+          newConnectorB.updatePosition();
+          if(newConduit.model) map.scene.remove(newConduit.model);
+          newConduit.construct();
+          map.scene.add(newConduit.model);
+          
+        }
+      },
+      pointerUp: function(e){
+        var splitter = newSplitter || otherSplitter;
+        splitter.handles.xzDragHandle.highlightOff();
+        splitter.handles.splitterConnectHandle.highlightOff();
+        map.scene.remove(refPlane);
+      }
+    };
+  }
   
 ;
 }).call(CC);

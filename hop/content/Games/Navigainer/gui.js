@@ -112,8 +112,6 @@ function assignEditorHandlers(){
       if (intersects.length) {
         firstIntersect = intersects[0];
         
-        window.insect = firstIntersect;
-        
         if (firstIntersect.object.drag) {
           mouse.dragging = true;
           

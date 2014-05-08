@@ -34,7 +34,7 @@ function SmartCanvas(options, $parentElement){
 		options.size ? options.size.y : $parentElement.innerHeight()
 	);
 
-	this.scale = 2 / devicePixelRatio;
+	this.scale = 1 / devicePixelRatio;
 	
 	this.bufferSize = this.size.clone().multiplyScalar( 1 / this.scale );
 	

@@ -144,7 +144,7 @@ function RingGeometry(options) {
     
     this.vertices.push(innerPointTop, innerPointBot, outerPointTop, outerPointBot);
   }
-  console.log('fullCircle: ', fullCircle);
+  
   //create faces
   var limit = segments * 4,
       topNormal = new THREE.Vector3(0,1,0),

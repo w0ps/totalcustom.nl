@@ -56,7 +56,6 @@ var Navigainer = Game.extend({
               aspect: 1,
               clip: {near: 0.1, far: 10000 }
       }, options) : {angle: 45, aspect: 1, clip: {near: 0.1, far: 10000 }};
-      console.log(options);
       var cam = new THREE.PerspectiveCamera(options.angle, options.aspect, options.clip.near, options.clip.far);
       
       cam.rotation.order = "YXZ";
